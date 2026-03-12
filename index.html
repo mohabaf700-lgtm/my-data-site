@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+<style>
+body{
+  margin:0;
+  font-family:Arial;
+  text-align:center;
+  background:linear-gradient(135deg,#ff758c,#ff7eb3);
+  height:100vh;
+  overflow:hidden;
+  color:white;
+}
+
+h1{
+  margin-top:50px;
+  font-size:45px;
+}
+
+p{
+  font-size:22px;
+}
+
+button{
+  padding:15px 35px;
+  font-size:22px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  position:absolute;
+  transition:0.3s;
+}
+
+#yes{
+  background:#ff2e63;
+  left:40%;
+  top:65%;
+  color:white;
+}
+
+#no{
+  background:#333;
+  left:55%;
+  top:65%;
+  color:white;
+}
+
+.heart{
+  position:absolute;
+  font-size:30px;
+  animation:float 6s linear infinite;
+  pointer-events:none;
+}
+
+@keyframes float{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  100%{transform:translateY(-900px) scale(1.5);opacity:0}
+}
+
+#messageContainer{
+  margin-top:30px;
+  font-size:24px;
+  line-height:1.5;
+  min-height:100px;
+}
+
+footer{
+  position:fixed;
+  bottom:5px;
+  right:5px;
+  font-size:10px;
+  color:white;
+  opacity:0.5;
+}
+</style>
+</head>
+<body>
+
+<!-- Created by Your Name, 2026 -->
+
+<h1 id="title">Hey Beautiful 💖</h1>
+<p id="question-text">I have a question...</p>
+<h2 id="question">Would you go on a date with me? 🌹</h2>
+
+<div id="messageContainer"></div>
+
+<button id="yes">Yes 😍</button>
+<button id="no">No 🙈</button>
+
+<audio id="song" src="be-my-baby.mp3"></audio>
+
+<footer>Created by Mohab</footer>
+
+<script>
+console.log("Website created by Your Name ❤️"); // علامة في DevTools
+
+let no = document.getElementById("no");
+let yes = document.getElementById("yes");
+let song = document.getElementById("song");
+let messageContainer = document.getElementById("messageContainer");
+let title = document.getElementById("title");
+let questionText = document.getElementById("question-text");
+let question = document.getElementById("question");
+
+// زر No يهرب
+no.addEventListener("mouseover", function(){
+  let x = Math.random()*80;
+  let y = Math.random()*80;
+  no.style.left = x + "vw";
+  no.style.top = y + "vh";
+});
+
+// زر Yes
+yes.onclick = function(){
+  // تشغيل الأغنية عند الضغط على Yes فقط
+  song.play();
+
+  // اخفاء النصوص القديمة
+  title.style.display = "none";
+  questionText.style.display = "none";
+  question.style.display = "none";
+  yes.style.display = "none";
+  no.style.display = "none";
+
+  // إضافة عنوان الرسالة
+  let titleMsg = document.createElement("h1");
+  titleMsg.textContent = "YOU SAID YES!! 💖";
+  messageContainer.appendChild(titleMsg);
+
+  // فقرة الرسالة حرف حرف
+  let loveMessage = document.createElement("p");
+  messageContainer.appendChild(loveMessage);
+  let message = "I can't wait for our date 🌹💖";
+  let i = 0;
+  let typing = setInterval(()=>{
+    loveMessage.innerHTML += message[i];
+    i++;
+    if(i >= message.length) clearInterval(typing);
+  },150);
+
+  // قلوب وورود متطايرة
+  setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    const symbols = ["❤️","💖","🌸","💐","🌹"];
+    heart.innerHTML = symbols[Math.floor(Math.random()*symbols.length)];
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.top = "100vh";
+    heart.style.fontSize = (20+Math.random()*50) + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>{ heart.remove(); },6000);
+  },200);
+}
+</script>
+
+</body>
+</html>
